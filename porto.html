@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Illustrator - Pixel Art</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #ff006e;
+            --secondary-color: #00d9ff;
+            --bg-dark: #0a0e27;
+            --bg-light: #1a1f3a;
+            --text-color: #ffffff;
+            --accent: #ffd60a;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background-color: var(--bg-dark);
+            color: var(--text-color);
+            background-image: 
+                repeating-linear-gradient(
+                    0deg,
+                    rgba(0, 0, 0, 0.15),
+                    rgba(0, 0, 0, 0.15) 1px,
+                    transparent 1px,
+                    transparent 2px
+                );
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== ANIMASI ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes glitch {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes scanlines {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 100%; }
+        }
+
+        @keyframes scaleUp {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        .pixel-text {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--secondary-color);
+            text-shadow: 
+                2px 2px 0 var(--primary-color),
+                4px 4px 0 rgba(255, 0, 110, 0.5);
+        }
+
+        .pixel-subtitle {
+            font-size: 0.75rem;
+            color: var(--accent);
+            margin-top: 0.5rem;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        p {
+            font-size: 0.75rem;
+            line-height: 1.8;
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: rgba(10, 14, 39, 0.95);
+            border-bottom: 3px solid var(--secondary-color);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            z-index: 100;
+            box-shadow: 0 0 20px rgba(0, 217, 255, 0.3);
+            animation: slideIn 0.6s ease-out;
+        }
+
+        nav a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.65rem;
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--accent);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: transparent;
+        }
+
+        nav a:hover {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 15px var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        nav a.active {
+            background-color: var(--secondary-color);
+            color: var(--bg-dark);
+            border-color: var(--secondary-color);
+        }
+
+        /* ===== HERO SECTION ===== */
+        #hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            padding-top: 5rem;
+            background: linear-gradient(135deg, var(--bg-dark), var(--bg-light));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+
+        .hero-text {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero-image {
+            position: relative;
+            border: 4px solid var(--secondary-color);
+            box-shadow: 
+                0 0 20px rgba(0, 217, 255, 0.5),
+                inset 0 0 20px rgba(0, 217, 255, 0.1);
+            padding: 1rem;
+            background-color: var(--bg-light);
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+            overflow: hidden;
+            max-width: 100%;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+            transition: transform 0.3s ease;
+        }
+
+        .hero-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .scanlines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            background: repeating-linear-gradient(
+                0deg,
+                rgba(0, 0, 0, 0.1),
+                rgba(0, 0, 0, 0.1) 1px,
+                transparent 1px,
+                transparent 2px
+            );
+            animation: scanlines 0.1s infinite;
+            opacity: 0.1;
+        }
+
+        /* ===== PROFILE SECTION ===== */
+        #profile {
+            padding: 4rem 2rem;
+            background-color: var(--bg-light);
+            min-height: 50vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-container {
+            max-width: 800px;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .profile-image {
+            border: 3px solid var(--accent);
+            padding: 0.5rem;
+            background-color: var(--bg-dark);
+            box-shadow: 0 0 20px rgba(255, 214, 10, 0.3);
+            animation: scaleUp 0.8s ease-out;
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+
+        .profile-info h2 {
+            color: var(--secondary-color);
+            text-shadow: 2px 2px 0 var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .profile-info p {
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .profile-bio {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        /* ===== PORTFOLIO SECTION ===== */
+        #portfolio {
+            padding: 4rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            animation: fadeInUp 1s ease-out 0.2s backwards;
+        }
+
+        .portfolio-card {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            border: 3px solid var(--secondary-color);
+            background-color: var(--bg-light);
+            aspect-ratio: 1;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 0 10px rgba(0, 217, 255, 0.3),
+                inset 0 0 10px rgba(0, 217, 255, 0.1);
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .portfolio-card:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .portfolio-card:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .portfolio-card:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        .portfolio-card:nth-child(5) {
+            animation-delay: 0.4s;
+        }
+
+        .portfolio-card:nth-child(6) {
+            animation-delay: 0.5s;
+        }
+
+        .portfolio-card:nth-child(7) {
+            animation-delay: 0.6s;
+        }
+
+        .portfolio-card:hover {
+            transform: scale(1.05);
+            box-shadow: 
+                0 0 20px rgba(0, 217, 255, 0.8),
+                inset 0 0 20px rgba(0, 217, 255, 0.2);
+        }
+
+        .card-image-container {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, var(--bg-dark), var(--bg-light));
+        }
+
+        .card-preview {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-card:hover .card-preview {
+            transform: scale(1.1);
+        }
+
+        .placeholder-pixel {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            background: repeating-linear-gradient(
+                45deg,
+                rgba(0, 217, 255, 0.1),
+                rgba(0, 217, 255, 0.1) 10px,
+                transparent 10px,
+                transparent 20px
+            );
+        }
+
+        .card-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 14, 39, 0.95);
+            padding: 0.75rem;
+            border-top: 2px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .card-label p {
+            font-size: 0.75rem;
+            color: var(--accent);
+        }
+
+        .pixel-border {
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary-color), transparent);
+            margin-top: 0.25rem;
+        }
+
+        .click-hint {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            font-size: 0.6rem;
+            border: 2px solid var(--text-color);
+            box-shadow: 0 0 20px var(--primary-color);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .portfolio-card:hover .click-hint {
+            opacity: 1;
+        }
+
+        /* ===== MODAL/DETAIL VIEW ===== */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(10, 14, 39, 0.98);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 2rem;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .modal-content {
+            background-color: var(--bg-light);
+            border: 4px solid var(--secondary-color);
+            padding: 2rem;
+            max-width: 90vw;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 
+                0 0 30px rgba(0, 217, 255, 0.5),
+                0 0 60px rgba(255, 0, 110, 0.3);
+            animation: scaleUp 0.3s ease-out;
+            border-radius: 0;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            position: relative;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 1rem;
+        }
+
+        .close-button, .back-button {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            border: 2px solid var(--text-color);
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Press Start 2P', cursive;
+        }
+
+        .close-button:hover, .back-button:hover {
+            box-shadow: 0 0 15px var(--primary-color);
+            transform: scale(1.05);
+        }
+
+        .close-button {
+            padding: 0.25rem 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: 1.75rem;
+            flex: 1;
+            text-align: center;
+            color: var(--secondary-color);
+        }
+
+        .glitch-line {
+            width: 2px;
+            height: 20px;
+            background-color: var(--primary-color);
+            animation: glitch 2s infinite;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            border: 2px solid var(--accent);
+            aspect-ratio: 1;
+            background-color: var(--bg-dark);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.5s ease-out;
+        }
+
+        .gallery-item:nth-child(odd) {
+            animation-delay: 0.1s;
+        }
+
+        .gallery-item:nth-child(even) {
+            animation-delay: 0.2s;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .hover-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 0, 110, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            font-size: 0.75rem;
+            color: var(--text-color);
+        }
+
+        .gallery-item:hover .hover-overlay {
+            opacity: 1;
+        }
+
+        /* ===== LIGHTBOX ===== */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            cursor: pointer;
+            padding: 2rem;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .lightbox.active {
+            display: flex;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .lightbox-image {
+            max-width: 90vw;
+            max-height: 90vh;
+            animation: scaleUp 0.3s ease-out;
+            image-rendering: pixelated;
+            image-rendering: -moz-crisp-edges;
+            image-rendering: crisp-edges;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            border: 2px solid var(--text-color);
+            width: 50px;
+            height: 50px;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Press Start 2P', cursive;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-close:hover {
+            box-shadow: 0 0 20px var(--primary-color);
+        }
+
+        /* ===== LOADING ===== */
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            font-size: 1rem;
+            color: var(--secondary-color);
+            animation: pulse 1s infinite;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: rgba(10, 14, 39, 0.9);
+            border-top: 3px solid var(--secondary-color);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        footer p {
+            color: var(--accent);
+            font-size: 0.65rem;
+        }
+
+        footer a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--primary-color);
+            text-shadow: 0 0 10px var(--primary-color);
+        }
+
+        /* ===== SCROLLBAR ===== */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-light);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--secondary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-color);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .profile-container {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+
+            h2 {
+                font-size: 1.75rem;
+            }
+
+            .pixel-text {
+                font-size: 1.25rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                gap: 0.5rem;
+                flex-wrap: wrap;
+                padding: 0.75rem;
+            }
+
+            nav a {
+                font-size: 0.6rem;
+                padding: 0.35rem 0.75rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+                gap: 1rem;
+            }
+
+            .modal-content {
+                padding: 1rem;
+                max-height: 85vh;
+            }
+
+            .modal-header {
+                flex-wrap: wrap;
+                gap: 1rem;
+            }
+
+            .modal-title {
+                font-size: 1.25rem;
+                width: 100%;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            p {
+                font-size: 0.65rem;
+            }
+
+            .profile-image {
+                max-width: 150px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                gap: 0.25rem;
+            }
+
+            nav a {
+                font-size: 0.5rem;
+                padding: 0.25rem 0.5rem;
+            }
+
+            .hero-image {
+                padding: 0.5rem;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.75rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.25rem;
+            }
+
+            .pixel-text {
+                font-size: 1rem;
+            }
+
+            p {
+                font-size: 0.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav>
+        <a href="#hero" onclick="navigateTo('hero')">HOME</a>
+        <a href="#profile" onclick="navigateTo('profile')">PROFILE</a>
+        <a href="#portfolio" onclick="navigateTo('portfolio')">PORTFOLIO</a>
+        <a href="#contact" onclick="navigateTo('contact')">CONTACT</a>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section id="hero">
+        <div class="hero-container">
+            <div class="hero-text pixel-text">
+                <h1>WELCOME</h1>
+                <p class="pixel-subtitle">>>> Portfolio Illustrator <<<</p>
+                <div style="margin-top: 2rem; font-size: 0.75rem; color: var(--accent);">
+                    <p>✦ Komik ✦ Ilustrasi Digital</p>
+                    <p>✦ Mural ✦ Merch ✦ Zine</p>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img id="heroImg" src="" alt="Hero" style="min-height: 300px; background-color: var(--bg-light);">
+                <div class="scanlines"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PROFILE SECTION -->
+    <section id="profile">
+        <div class="profile-container">
+            <div class="profile-image">
+                <img id="profileImg" src="" alt="Profile" style="min-width: 200px; min-height: 200px; background-color: var(--bg-dark);">
+            </div>
+            <div class="profile-info">
+    		<h2 class="pixel-text">GREETINGS!</h2>
+    		<div class="profile-bio">
+        		<p>MY NAME IS ALI, YOU CAN CALL ME <strong>CICAKBUNCIT</strong> SINCE IT'S MY ARTIST NAME.</p>
+        		<p style="margin-top: 1rem;">I'M A STUDENT OF INTERACTIVE DESIGN AND TECHNOLOGY AT BINUS BANDUNG.</p>
+        	<p style="margin-top: 1rem;">SOUNDS UNFAMILIAR? BASICALLY, IT'S A DOUBLE DEGREE IN VISUAL COMMUNICATION DESIGN AND INFORMATION SYSTEMS. SO, I THRIVE ART AND TECHNOLOGY.</p>
+        		<p style="margin-top: 1rem;">I'VE BEEN FREELANCE DRAWING SINCE HIGH SCHOOL. I MAINLY FOCUS ON ILLUSTRATION, BOTH MANUAL AND DIGITAL.</p>
+        		<p style="margin-top: 1rem;">COME EXPLORE MY GALLERY :D >></p>
+    		</div>
+    		<p style="margin-top: 1.5rem;">📧 Email: pedesnyadikitaja@gmail.com</p>
+    		<p>🔗 Instagram: @cicakbuncit</p>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO SECTION -->
+    <section id="portfolio">
+        <h2 class="section-title pixel-text">= PORTFOLIO =</h2>
+        <div class="portfolio-grid" id="portfolioGrid">
+            <!-- Diisi dengan JavaScript -->
+        </div>
+    </section>
+
+    <!-- MODAL DETAIL -->
+    <div class="modal" id="detailModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="back-button" onclick="closeModal()">← BACK</button>
+                <h2 class="modal-title" id="modalTitle">Category</h2>
+                <div class="glitch-line"></div>
+            </div>
+            <div class="loading" id="loadingIndicator">⏳ LOADING...</div>
+            <div class="gallery-grid" id="galleryGrid" style="display: none;">
+                <!-- Diisi dengan JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+        <img class="lightbox-image" id="lightboxImage" src="" alt="Full view">
+    </div>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+        <p>© 2024 Portfolio Illustrator | Made with ❤️ and Pixel Art</p>
+        <p style="margin-top: 1rem; font-size: 0.6rem;">Follow social media untuk update karya terbaru!</p>
+    </footer>
+
+    <script>
+        // ===== PORTFOLIO DATA =====
+        const CATEGORIES = [
+            { id: 'Comic', label: 'COMIC', icon: '📖' },
+            { id: 'Illustrasi digital', label: 'DIGITAL', icon: '🎨' },
+            { id: 'Illustrasi manual', label: 'MANUAL', icon: '✏️' },
+            { id: 'Journal', label: 'JOURNAL', icon: '📓' },
+            { id: 'Merch', label: 'MERCH', icon: '👕' },
+            { id: 'Mural', label: 'MURAL', icon: '🖼️' },
+            { id: 'Zine', label: 'ZINE', icon: '📰' }
+        ];
+
+        const GITHUB_API = 'https://api.github.com/repos/cicakbuncit/Porto-assets/contents';
+
+        // ===== FETCH GITHUB ASSETS =====
+        async function fetchGitHubAssets(path = '') {
+            try {
+                const url = path ? `${GITHUB_API}/${path}` : GITHUB_API;
+                const response = await fetch(url);
+                
+                if (!response.ok) throw new Error('Failed to fetch');
+                
+                const data = await response.json();
+                
+                return data
+                    .filter(item => /\.(png|jpg|jpeg|gif|webp)$/i.test(item.name))
+                    .map(item => ({
+                        name: item.name,
+                        url: item.download_url,
+                        path: item.path
+                    }));
+            } catch (error) {
+                console.error('Error fetching assets:', error);
+                return [];
+            }
+        }
+
+        // ===== INITIALIZE PORTFOLIO =====
+        async function initPortfolio() {
+            const portfolioGrid = document.getElementById('portfolioGrid');
+            
+            for (const category of CATEGORIES) {
+                const assets = await fetchGitHubAssets(`Portfolio/${category.id}`);
+                const previewImage = assets[0];
+
+                const card = document.createElement('div');
+                card.className = 'portfolio-card';
+                card.innerHTML = `
+                    <div class="card-image-container">
+                        ${previewImage ? 
+                            `<img src="${previewImage.url}" alt="${category.label}" class="card-preview">` :
+                            `<div class="placeholder-pixel"><span>${category.icon}</span></div>`
+                        }
+                    </div>
+                    <div class="card-label">
+                        <p>${category.label}</p>
+                        <div class="pixel-border"></div>
+                    </div>
+                    <div class="click-hint">CLICK TO VIEW</div>
+                `;
+                
+                card.addEventListener('click', () => openModal(category));
+                portfolioGrid.appendChild(card);
+            }
+
+            // Load Hero and Profile images
+            loadHeroImage();
+            loadProfileImage();
+        }
+
+        // ===== LOAD HERO IMAGE =====
+        async function loadHeroImage() {
+            const assets = await fetchGitHubAssets('Hero');
+            if (assets.length > 0) {
+                document.getElementById('heroImg').src = assets[0].url;
+            }
+        }
+
+        // ===== LOAD PROFILE IMAGE =====
+        async function loadProfileImage() {
+            const assets = await fetchGitHubAssets('Profile');
+            if (assets.length > 0) {
+                document.getElementById('profileImg').src = assets[0].url;
+            }
+        }
+
+        // ===== OPEN MODAL =====
+        async function openModal(category) {
+            const modal = document.getElementById('detailModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const galleryGrid = document.getElementById('galleryGrid');
+            const loadingIndicator = document.getElementById('loadingIndicator');
+
+            modalTitle.textContent = category.label;
+            galleryGrid.innerHTML = '';
+            loadingIndicator.style.display = 'block';
+            galleryGrid.style.display = 'none';
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            // Fetch gallery images
+            const assets = await fetchGitHubAssets(`Portfolio/${category.id}`);
+            
+            loadingIndicator.style.display = 'none';
+            
+            if (assets.length > 0) {
+                galleryGrid.style.display = 'grid';
+                
+                assets.forEach((asset, idx) => {
+                    const item = document.createElement('div');
+                    item.className = 'gallery-item';
+                    item.innerHTML = `
+                        <img src="${asset.url}" alt="${asset.name}">
+                        <div class="hover-overlay">VIEW</div>
+                    `;
+                    item.addEventListener('click', () => openLightbox(asset.url));
+                    galleryGrid.appendChild(item);
+                });
+            } else {
+                galleryGrid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; padding: 2rem;">Belum ada karya di kategori ini</p>';
+                galleryGrid.style.display = 'grid';
+            }
+        }
+
+        // ===== CLOSE MODAL =====
+        function closeModal() {
+            const modal = document.getElementById('detailModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // ===== OPEN LIGHTBOX =====
+        function openLightbox(imageSrc) {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImage = document.getElementById('lightboxImage');
+            lightboxImage.src = imageSrc;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // ===== CLOSE LIGHTBOX =====
+        function closeLightbox() {
+            const lightbox = document.getElementById('lightbox');
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // ===== NAVIGATION =====
+        function navigateTo(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+            }
+            updateActiveNav(sectionId);
+        }
+
+        function updateActiveNav(sectionId) {
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${sectionId}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // ===== CLOSE MODAL DENGAN ESC =====
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeModal();
+                closeLightbox();
+            }
+        });
+
+        // ===== CLOSE LIGHTBOX DENGAN CLICK OUTSIDE =====
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target.id === 'lightbox') {
+                closeLightbox();
+            }
+        });
+
+        // ===== CLOSE MODAL DENGAN CLICK OUTSIDE =====
+        document.getElementById('detailModal').addEventListener('click', (e) => {
+            if (e.target.id === 'detailModal') {
+                closeModal();
+            }
+        });
+
+        // ===== UPDATE ACTIVE NAV ON SCROLL =====
+        window.addEventListener('scroll', () => {
+            let currentSection = 'hero';
+            
+            const sections = ['hero', 'profile', 'portfolio', 'contact'];
+            sections.forEach(id => {
+                const element = document.getElementById(id);
+                if (element) {
+                    const rect = element.getBoundingClientRect();
+                    if (rect.top <= 100) {
+                        currentSection = id;
+                    }
+                }
+            });
+            
+            updateActiveNav(currentSection);
+        });
+
+        // ===== INITIALIZE APP =====
+        document.addEventListener('DOMContentLoaded', initPortfolio);
+    </script>
+</body>
+</html>
+
